@@ -1,6 +1,8 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 
+from django.contrib.auth.models import User
+
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=200)
@@ -25,3 +27,14 @@ class Product(models.Model):
     
     def __str__(self):
         return self.name
+    
+class Client(models.Model):
+    user = models.OneToOneField(User,on_delete=models.RESTRICT)
+    phone = models.CharField(max_length=100)
+    address = models.TextField()
+    
+    class Meta:
+        db_table = 'tbl_client'
+        
+    def __str__(self):
+        return self.user.username
