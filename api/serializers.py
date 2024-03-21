@@ -9,7 +9,23 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = '__all__'
         
+    def to_representation(self,instance):
+        representation = super().to_representation(instance)
+        return representation
+        
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+        
+    def to_representation(self,instance):
+        representation = super().to_representation(instance)
+        representation['image'] = instance.image.url
+        return representation
+    
+class CategoryProductSerializer(serializers.ModelSerializer):
+    products = ProductSerializer(many=True,read_only=True)
+    
+    class Meta:
+        model = Category
+        fields = ['id','name','products']

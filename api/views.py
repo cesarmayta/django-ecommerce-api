@@ -6,7 +6,8 @@ from .models import (
 
 from .serializers import (
     CategorySerializer,
-    ProductSerializer
+    ProductSerializer,
+    CategoryProductSerializer
 )
 
 class CategoryView(generics.ListAPIView):
@@ -16,5 +17,10 @@ class CategoryView(generics.ListAPIView):
 class ProductView(generics.ListAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+class CategoryProductsView(generics.RetrieveAPIView):
+    queryset = Category.objects.all()
+    lookup_url_kwarg = 'category_id'
+    serializer_class = CategoryProductSerializer
     
     
