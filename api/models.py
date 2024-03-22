@@ -38,3 +38,28 @@ class Client(models.Model):
         
     def __str__(self):
         return self.user.username
+    
+class Order(models.Model):
+    code = models.CharField(max_length=10)
+    register_date = models.DateField(auto_now_add=True)
+    client = models.ForeignKey(Client,on_delete=models.RESTRICT)
+    
+    class Meta:
+        db_table = 'tbl_order'
+    
+    def __str__(self):
+        return self.code
+    
+class OrderDetail(models.Model):
+    order = models.ForeignKey(Order,
+                              related_name='details',
+                              on_delete=models.RESTRICT)
+    product = models.ForeignKey(Product,
+                                on_delete=models.RESTRICT)
+    quantity = models.IntegerField(default=1)
+    
+    class Meta:
+        db_table = 'tbl_order_detail'
+        
+    def __str__(self):
+        return self.product.name
