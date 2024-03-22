@@ -43,6 +43,8 @@ class Order(models.Model):
     code = models.CharField(max_length=10)
     register_date = models.DateField(auto_now_add=True)
     client = models.ForeignKey(Client,on_delete=models.RESTRICT)
+    total_price = models.DecimalField(max_digits=10,decimal_places=2,default=0)
+    discount = models.DecimalField(max_digits=10,decimal_places=2,default=0)
     
     class Meta:
         db_table = 'tbl_order'
@@ -57,6 +59,7 @@ class OrderDetail(models.Model):
     product = models.ForeignKey(Product,
                                 on_delete=models.RESTRICT)
     quantity = models.IntegerField(default=1)
+    subtotal = models.DecimalField(max_digits=10,decimal_places=2,default=0)
     
     class Meta:
         db_table = 'tbl_order_detail'
