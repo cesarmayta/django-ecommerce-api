@@ -65,3 +65,22 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username','first_name','last_name','email']
+        
+class UserFullSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username','first_name','last_name','email','password']
+        extra_kwargs = {'password':{'write_only':True}}
+        
+class ClientFullSerializer(serializers.ModelSerializer):
+    user = UserFullSerializer()
+    
+    class Meta:
+        model = Client
+        fields = ('user','phone','address')
+        
+    def create(self,validated_data):
+        user_data = validated_data.pop('user')
+        user = User.objects.create_user(**user_data)
+        client = Client.objects.create(user=user,**validated_data)
+        return client

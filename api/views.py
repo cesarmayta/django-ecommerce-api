@@ -11,7 +11,8 @@ from .serializers import (
     CategoryProductSerializer,
     ClientSerializer,
     UserSerializer,
-    UserUpdateSerializer
+    UserUpdateSerializer,
+    ClientFullSerializer
 )
 
 from django.contrib.auth.models import User
@@ -44,4 +45,8 @@ class UserView(generics.ListCreateAPIView):
 class UserDetailView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserUpdateSerializer
+    
+class ClientFullView(generics.ListCreateAPIView):
+    queryset = Client.objects.all()
+    serializer_class = ClientFullSerializer
     
