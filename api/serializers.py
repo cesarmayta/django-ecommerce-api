@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 
 from .models import (
     Category,Product,
-    Client
+    Client,
+    Order,OrderDetail
 )
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -84,3 +85,24 @@ class ClientFullSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**user_data)
         client = Client.objects.create(user=user,**validated_data)
         return client
+    
+class OrderDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderDetail
+        fields = ('product','quantity','subtotal')
+        
+class OrderSerializer(serializers.ModelSerializer):
+    details = OrderDetailSerializer(many=True)
+    
+    class Meta:
+        model = Order
+        fields = ['code','register_date','client','total_price','discount','details']
+        
+    def create(self,validated_data):
+        list_details = validated_data.pop('details')
+        order = Order.objects.create(**validated_data)
+        for obj_detail in list_details:
+            OrderDetail.objects.create(order=order,**obj_detail)
+        return order
+        
+        
