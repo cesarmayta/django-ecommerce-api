@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 from .models import (
     Category,Product,
     Client,
-    Order,OrderDetail
+    Order,OrderDetail,
+    PaymentMethod,OrderPayment
 )
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -104,5 +105,24 @@ class OrderSerializer(serializers.ModelSerializer):
         for obj_detail in list_details:
             OrderDetail.objects.create(order=order,**obj_detail)
         return order
+    
+class PaymentMethodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentMethod
+        fields = '__all__'
+        
+    def to_representation(self,instance):
+        representation = super().to_representation(instance)
+        return representation
+    
+class OrderPaymentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderPayment
+        fields = '__all__'
+        
+    def to_representation(self,instance):
+        representation = super().to_representation(instance)
+        representation['payment_method_name'] = instance.payment_method.name
+        return representation
         
         

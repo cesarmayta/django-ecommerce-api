@@ -2,7 +2,9 @@ from rest_framework import generics
 
 from .models import (
     Category,Product,
-    Client,Order
+    Client,Order,
+    PaymentMethod,
+    OrderPayment
 )
 
 from .serializers import (
@@ -13,7 +15,9 @@ from .serializers import (
     UserSerializer,
     UserUpdateSerializer,
     ClientFullSerializer,
-    OrderSerializer
+    OrderSerializer,
+    PaymentMethodSerializer,
+    OrderPaymentSerializer
 )
 
 from django.contrib.auth.models import User
@@ -54,4 +58,12 @@ class ClientFullView(generics.ListCreateAPIView):
 class OrderView(generics.ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    
+class PaymentMethodView(generics.ListCreateAPIView):
+    queryset = PaymentMethod.objects.all()
+    serializer_class = PaymentMethodSerializer
+    
+class OrderPaymentView(generics.ListCreateAPIView):
+    queryset = OrderPayment.objects.all()
+    serializer_class = OrderPaymentSerializer
     
