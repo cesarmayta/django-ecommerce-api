@@ -3,3 +3,4 @@ djangorestframework
 cloudinary
 python-decouple
 djangorestframework-simplejwt
+drf-yasg
