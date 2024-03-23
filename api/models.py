@@ -40,11 +40,18 @@ class Client(models.Model):
         return self.user.username
     
 class Order(models.Model):
+    
+    STATUS_CHOICES = (
+        ('1','pending'),
+        ('2','complete')
+    )
+    
     code = models.CharField(max_length=10)
     register_date = models.DateField(auto_now_add=True)
     client = models.ForeignKey(Client,on_delete=models.RESTRICT)
     total_price = models.DecimalField(max_digits=10,decimal_places=2,default=0)
     discount = models.DecimalField(max_digits=10,decimal_places=2,default=0)
+    status = models.CharField(max_length=1,choices=STATUS_CHOICES,default='1')
     
     class Meta:
         db_table = 'tbl_order'
@@ -66,3 +73,26 @@ class OrderDetail(models.Model):
         
     def __str__(self):
         return self.product.name
+    
+class PaymentMethod(models.Model):
+    name = models.CharField(max_length=200)
+    account_email = models.CharField(max_length=200)
+    
+    class Meta:
+        db_table = 'tbl_payment_method'
+        
+    def __str__(self):
+        return self.name
+    
+class OrderPayment(models.Model):
+    order = models.ForeignKey(Order,on_delete=models.RESTRICT)
+    payment_method = models.ForeignKey(PaymentMethod,on_delete=models.RESTRICT)
+    amount = models.DecimalField(max_digits=10,decimal_places=2)
+    refer_number = models.TextField()
+    
+    class Meta:
+        db_table = 'tbl_order_payment'
+        
+    def __str__(self):
+        return self.order.code
+    
