@@ -43,6 +43,17 @@ class ClienteDetailView(generics.RetrieveUpdateAPIView):
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
     
+class ClienteDetailByUserView(generics.RetrieveAPIView):
+    serializer_class = ClientSerializer
+    
+    def get_object(self):
+        user_id = self.kwargs.get('user_id')
+        user = User.objects.get(pk=user_id)
+        
+        client = Client.objects.filter(user=user).first()
+        
+        return client
+    
 class UserView(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -66,4 +77,5 @@ class PaymentMethodView(generics.ListCreateAPIView):
 class OrderPaymentView(generics.ListCreateAPIView):
     queryset = OrderPayment.objects.all()
     serializer_class = OrderPaymentSerializer
+    
     
