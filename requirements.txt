@@ -5,3 +5,4 @@ python-decouple
 djangorestframework-simplejwt
 drf-yasg
 django-cors-headers
+psycopg2

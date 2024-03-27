@@ -1,0 +1,60 @@
+[
+{
+  "model": "api.category",
+  "pk": 1,
+  "fields": {
+    "name": "Polos"
+  }
+},
+{
+  "model": "api.category",
+  "pk": 2,
+  "fields": {
+    "name": "Poleras"
+  }
+},
+{
+  "model": "api.product",
+  "pk": 1,
+  "fields": {
+    "name": "Polo Python developer",
+    "description": "Polo python developer",
+    "price": "50.00",
+    "image": "image/upload/v1710989082/bc4znxfeb09n7fswwufc.webp",
+    "category": 1
+  }
+},
+{
+  "model": "api.product",
+  "pk": 2,
+  "fields": {
+    "name": "Polera Python",
+    "description": "Polera Python",
+    "price": "100.00",
+    "image": "image/upload/v1710989151/stvkb4jeml8dkxf5bnjb.webp",
+    "category": 2
+  }
+},
+{
+  "model": "api.product",
+  "pk": 3,
+  "fields": {
+    "name": "Polo Nodejs",
+    "description": "Polo Nodejs",
+    "price": "40.00",
+    "image": "image/upload/v1710989171/g8xzykpdvgtrtq7lgrlq.webp",
+    "category": 1
+  }
+},
+{
+  "model": "api.product",
+  "pk": 4,
+  "fields": {
+    "name": "Polera React",
+    "description": "Polera React",
+    "price": "80.00",
+    "image": "image/upload/v1710989192/ug9nvdbn6nrlyroibu63.webp",
+    "category": 2
+  }
+}
+]
