@@ -96,8 +96,8 @@ DATABASES = {
         "NAME": "db_ecommerce_g24",
         "USER": "postgres",
         "PASSWORD": "root",
-        "HOST": "127.0.0.1",
-        "PORT": "5433",
+        "HOST": "db",
+        "PORT": "5432",
     }
 }
 
