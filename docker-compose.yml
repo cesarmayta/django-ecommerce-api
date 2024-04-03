@@ -30,7 +30,7 @@ services:
     container_name: ecommerce.proxy
     build: ./nginx
     volumes:
-      - ./app/static:/usr/src/app/static
+      - ./static:/usr/src/app/static
     ports:
       - 8080:80
     depends_on:
