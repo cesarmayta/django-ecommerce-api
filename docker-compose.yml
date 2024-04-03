@@ -36,6 +36,14 @@ services:
     depends_on:
       - api
 
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL : "admin@admin.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - 8081:80
+
 volumes:
   postgres_data:
   static_volume:
