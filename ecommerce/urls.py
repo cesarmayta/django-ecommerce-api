@@ -29,8 +29,8 @@ from rest_framework_simplejwt.views import (
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="ECOMMERCE API CODIGO G24",
-      default_version='v2.3',
+      title="ECOMMERCE API CODIGO G24 CON DJANGO",
+      default_version='v2.4',
       description="Example of ecommerce API With Django and DRF",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="cesarmayta@gmail.com"),
